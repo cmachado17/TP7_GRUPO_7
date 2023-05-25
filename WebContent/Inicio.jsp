@@ -10,6 +10,7 @@
 <a href="#">Inicio</a>
 <a href="#">Agregar seguro</a>
 <a href="#">Listar seguros</a>
+<br/>
 <h1>Soy la página inicio</h1>
 </body>
 </html>
