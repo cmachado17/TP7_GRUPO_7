@@ -10,7 +10,5 @@
 	<a href="servletSeguro?Param=0">Inicio</a>
 	<a href="servletSeguro?Param=1">Agregar seguro</a>
 	<a href="servletSeguro?Param=2">Listar seguros</a>
-	<br/>
-	<h1>Soy la página inicio</h1>
 </body>
 </html>
