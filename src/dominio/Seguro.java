@@ -14,7 +14,6 @@ public class Seguro {
 		
 	}
 	
-	
 	public int getIdSeguro() {
 		return idSeguro;
 	}

@@ -9,6 +9,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import dominio.Seguro;
+import dominio.SeguroDao;
+
 
 @WebServlet("/servletSeguro")
 public class servletSeguro extends HttpServlet {
@@ -31,11 +34,28 @@ public class servletSeguro extends HttpServlet {
 				break;
 			default:
 				dispatcher = "/Inicio.jsp";
+				break;
 			}
 			
 			RequestDispatcher rd=request.getRequestDispatcher(dispatcher);  
 	        rd.forward(request, response);  
 		}
+		
+		if(request.getParameter("btnAceptar")!=null) {
+	
+			Seguro s = new Seguro();
+			s.setDescripcion(request.getParameter("txtDescripcion"));
+			s.setIdTipo(Integer.parseInt(request.getParameter("tipoSeguro").toString()));
+			s.setCostoContratacion(Float.parseFloat(request.getParameter("txtCostoContratacion").toString()));
+			s.setCostoAsegurado(Float.parseFloat(request.getParameter("txtCostoMaximoAsegurado").toString()));
+			
+			SeguroDao sdao = new SeguroDao();
+			int filas = sdao.agregarSeguro(s);
+			
+			RequestDispatcher rd=request.getRequestDispatcher("/AgregarSeguro.jsp");  
+	        rd.forward(request, response);  
+		}
+		
 	}
 
 
