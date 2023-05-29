@@ -17,9 +17,9 @@ public class Seguro {
 	public int getIdSeguro() {
 		return idSeguro;
 	}
-	public void setIdSeguro(int idSeguro) {
-		this.idSeguro = idSeguro;
-	}
+	//public void setIdSeguro(int idSeguro) {	NO HACE FALTA ESTE SETTER PORQUE EL ID SE GENERA AUTOMÁTICAMENTE EN LA BBDD
+	//	this.idSeguro = idSeguro;
+	//}
 	public String getDescripcion() {
 		return descripcion;
 	}
