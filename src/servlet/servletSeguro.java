@@ -46,7 +46,16 @@ public class servletSeguro extends HttpServlet {
 				
 				break;
 			case "2":
-				dispatcher = "/ListarSeguros.jsp";
+			
+				TipoSeguroDao tipoSeguroDaos = new TipoSeguroDao();
+				ArrayList <TipoSeguro> lista= tipoSeguroDaos.obtenerTiposSeguros();
+				request.setAttribute("listaTSS", lista);
+				
+				RequestDispatcher rd= request.getRequestDispatcher("/ListarSeguros.jsp");
+				rd.forward(request, response);
+				
+				
+				//dispatcher = "/ListarSeguros.jsp";
 				break;
 			default:
 				dispatcher = "/Inicio.jsp";
