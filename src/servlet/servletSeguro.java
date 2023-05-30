@@ -25,9 +25,14 @@ public class servletSeguro extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		if(request.getParameter("Param")!=null) {
 			String dispatcher="";
+			
 			switch(request.getParameter("Param")) {
 			case "1":
+				SeguroDao seguroDao = new SeguroDao();
+				int proximo = seguroDao.obtenerProximoId();
+				request.setAttribute("id", proximo);
 				dispatcher = "/AgregarSeguro.jsp";
+				
 				break;
 			case "2":
 				dispatcher = "/ListarSeguros.jsp";
@@ -53,7 +58,7 @@ public class servletSeguro extends HttpServlet {
 			int filas = sdao.agregarSeguro(s);
 			
 			request.setAttribute("cantFilas", filas);
-			RequestDispatcher rd=request.getRequestDispatcher("/AgregarSeguro.jsp");  
+			RequestDispatcher rd=request.getRequestDispatcher("/Inicio.jsp");  
 	        rd.forward(request, response);  
 		}
 		

@@ -8,7 +8,7 @@
 </head>
 <body>
 	<a href="servletSeguro?Param=0">Inicio</a>
-	<a href="servletSeguro?Param=1">Agregar seguro</a>
-	<a href="servletSeguro?Param=2">Listar seguros</a>
+	<a href="servletSeguro?Param=1" style="margin-left: 5px">Agregar seguro</a>
+	<a href="servletSeguro?Param=2" style="margin-left: 5px">Listar seguros</a>
 </body>
 </html>

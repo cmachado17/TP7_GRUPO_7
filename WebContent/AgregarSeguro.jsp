@@ -10,42 +10,42 @@
 <title>Agregar Seguro</title>
 </head>
 <body>
-	<a href="servletSeguro?Param=0">Inicio</a><br>
-	<a href="servletSeguro?Param=1">Agregar seguro</a><br>
-	<a href="servletSeguro?Param=2">Listar seguros</a>
+	<a href="servletSeguro?Param=0">Inicio</a>
+	<a href="servletSeguro?Param=1" style="margin-left: 5px">Agregar seguro</a>
+	<a href="servletSeguro?Param=2" style="margin-left: 5px">Listar seguros</a>
 	<br/>
 	
-	<% int proximo=0; 
-		SeguroDao seguroDao = new SeguroDao();
-		proximo=seguroDao.obtenerProximoId();	
+	
+	<h1>Agregar seguros</h1> <br>
+	
+
+	
+		<% int proximo=0; 
+		
+		if(request.getAttribute("id") != null){
+		proximo = (int) request.getAttribute("id");
+		
 	%>
 	
-	<h1>Agregar seguros</h1>
-	<form action="servletSeguro" method="get">
-		Id Seguro <input type="text" name="proxId" readonly="readonly" value=<%=proximo%> style="width: 52px; background-color: lightgrey; "> <br>	
-		Descripcion	<input type="text" name="txtDescripcion"> <br>
+		<form action="servletSeguro" method="get">
+	
+		Id Seguro <b style="margin-left: 112px"> <%=proximo%>  </b> <br>	<br>
+		
+		<%}//cierro el if %>	
+		
+		Descripcion	<input style="margin-left: 96px" type="text" name="txtDescripcion"> <br><br>	
 		Tipo de seguro			
-		<select name="tipoSeguro">
+		<select name="tipoSeguro" style="margin-left: 77px">
 			<option value="1">Seguro de casas</option>
 			<option value="2">Seguro de vida</option>
 			<option value="3">Seguro de motos</option>
-		</select><br>
-		Costo contratacion	<input type="text" name="txtCostoContratacion"> <br>
-		Costo máximo asegurado	<input type="text" name="txtCostoMaximoAsegurado"> <br>
-	<input type="submit" value="Aceptar" name="btnAceptar">
+		</select><br><br>	
+		Costo contratacion	<input style="margin-left: 53px" type="text" name="txtCostoContratacion"> <br><br>	
+		Costo máximo asegurado	<input style="margin-left: 10px" type="text" name="txtCostoMaximoAsegurado"> <br><br>
+	<input style="margin-left: 177px" type="submit" value="Aceptar" name="btnAceptar">
 </form>
 
-<%
-	int filas= 0;
-	if(request.getAttribute("cantFilas")!=null){	
-		filas=Integer.parseInt(request.getAttribute("cantFilas").toString());
-	}
-%>
 
- <%if(filas==1)
- 	{  %>
- 		Se agregó exitosamente.
- <%	} %>
 
 </body>
 </html>

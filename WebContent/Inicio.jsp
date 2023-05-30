@@ -7,10 +7,25 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<a href="servletSeguro?Param=0">Inicio</a><br>
-	<a href="servletSeguro?Param=1">Agregar seguro</a><br>
-	<a href="servletSeguro?Param=2">Listar seguros</a>
+	<a href="servletSeguro?Param=0">Inicio</a>
+	<a href="servletSeguro?Param=1" style="margin-left: 5px">Agregar seguro</a>
+	<a href="servletSeguro?Param=2" style="margin-left: 5px">Listar seguros</a>
 	<br/>
 	<h1>Soy la página inicio</h1>
+	
+	<br>
+	<br>
+	
+	<%
+	int filas= 0;
+	if(request.getAttribute("cantFilas")!=null){	
+		filas=Integer.parseInt(request.getAttribute("cantFilas").toString());
+	}
+%>
+
+ <%if(filas==1)
+ 	{  %>
+ 		<b> Se agregó exitosamente <b>
+ <%	} %>
 </body>
 </html>
