@@ -50,7 +50,13 @@ public class servletSeguro extends HttpServlet {
 			case "2":
 			
 				TipoSeguroDao tipoSeguroDaos = new TipoSeguroDao();
+				TipoSeguro todos = new TipoSeguro();
+				todos.setDescripcion("Todos");
+				todos.setIdTipo(0);
+				
 				ArrayList <TipoSeguro> listaTs= tipoSeguroDaos.obtenerTiposSeguros();
+				listaTs.add(todos);
+				
 				request.setAttribute("listaTSS", listaTs);
 				
 				SeguroDao sdao = new SeguroDao();
@@ -72,36 +78,92 @@ public class servletSeguro extends HttpServlet {
 	        rd.forward(request, response);  
 		}
 		
+		//BOTÓN AGREGAR
 		if(request.getParameter("btnAceptar")!=null) {
-	
+			
+			boolean camposCompletos=true;
+			
 			TipoSeguroDao tsdao = new TipoSeguroDao();
 			
 			Seguro s = new Seguro();
-			s.setDescripcion(request.getParameter("txtDescripcion"));
-			s.setTipoSeguro(tsdao.obtenerTipoSeguro(request.getParameter("tipoSeguro").toString()));
-			s.setCostoContratacion(Float.parseFloat(request.getParameter("txtCostoContratacion").toString()));
-			s.setCostoAsegurado(Float.parseFloat(request.getParameter("txtCostoMaximoAsegurado").toString()));
+			
+			try {				
+				if(request.getParameter("txtDescripcion")!="") {
+					s.setDescripcion(request.getParameter("txtDescripcion"));				
+				}
+				else {
+					camposCompletos=false;
+				}
+				
+				if(request.getParameter("tipoSeguro").toString()!=""){
+					s.setTipoSeguro(tsdao.obtenerTipoSeguro(request.getParameter("tipoSeguro").toString()));				
+				}
+				else {
+					camposCompletos=false;
+				}
+				
+				if(request.getParameter("txtCostoContratacion").toString()!="") {
+					s.setCostoContratacion(Float.parseFloat(request.getParameter("txtCostoContratacion").toString()));
+				}
+				else {
+					camposCompletos=false;
+				}
+				
+				if(request.getParameter("txtCostoMaximoAsegurado").toString()!="") {
+					
+					s.setCostoAsegurado(Float.parseFloat(request.getParameter("txtCostoMaximoAsegurado").toString()));
+				}
+				else {
+					camposCompletos=false;
+				}			
+			} 
+			
+			catch (NumberFormatException e) {
+				e.printStackTrace();
+			}			
+			catch (NullPointerException e) {
+				e.printStackTrace();
+			}
 			
 			SeguroDao sdao = new SeguroDao();
-			int filas = sdao.agregarSeguro(s);
+			int filas=0;		
 			
-			request.setAttribute("cantFilas", filas);
-			RequestDispatcher rd=request.getRequestDispatcher("/Inicio.jsp");  
-	        rd.forward(request, response);  
+			if(camposCompletos) {
+				filas = sdao.agregarSeguro(s);	
+				request.setAttribute("cantFilas", filas);
+				RequestDispatcher rd=request.getRequestDispatcher("/Inicio.jsp");  
+				rd.forward(request, response);  				
+			}
+			else {
+				request.setAttribute("cantFilas", filas);		
+				RequestDispatcher rd=request.getRequestDispatcher("servletSeguro?Param=1");
+				rd.forward(request, response);  		
+			}
 		}
 		
+		
+		//BOTÓN FILTRAR
 		if(request.getParameter("btnFiltrar")!=null) {		
 			SeguroDao sdao = new SeguroDao();
+			TipoSeguro todos = new TipoSeguro();
+			todos.setDescripcion("Todos");
+			todos.setIdTipo(0);
+			
 			ArrayList <Seguro> listaSeguros = sdao.obtenerSeguros();
 			int idTipoSeguro = Integer.parseInt(request.getParameter("tipoSeguro").toString());
-			listaSeguros = (ArrayList<Seguro>) listaSeguros
+			
+			if(idTipoSeguro!=0) {
+				listaSeguros = (ArrayList<Seguro>) listaSeguros
 					.stream()
 					.filter(x-> x.getTipoSeguro().getIdTipo() == idTipoSeguro)
 					.collect(Collectors.toList());
+			}
 			request.setAttribute("listaSeguros", listaSeguros);
 			
 			TipoSeguroDao tipoSeguroDaos = new TipoSeguroDao();
 			ArrayList <TipoSeguro> listaTs= tipoSeguroDaos.obtenerTiposSeguros();
+			listaTs.add(todos);
+			
 			request.setAttribute("listaTSS", listaTs);		
 			
 			RequestDispatcher rd= request.getRequestDispatcher("/ListarSeguros.jsp");

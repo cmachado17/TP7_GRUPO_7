@@ -48,10 +48,10 @@ for(TipoSeguro tipo : listaTipoSeguros) { %>
 <br><br>			
 		
 		<table border="1">
-		<tr> 	<th>ID seguro</th>   <th>Descripcion seguro</th> <th>Descripcion tipo seguro</th>   <th>Costo Contratacion</th> <th>Costo maximo asegurado</th> </tr>
+		<tr> 	<th style="padding: 7px ">ID seguro</th>   <th>Descripcion seguro</th> <th>Descripcion tipo seguro</th>   <th>Costo Contratacion</th> <th>Costo maximo asegurado</th> </tr>
 		<% if(listaSeguros != null)
 			for(Seguro seguro : listaSeguros){%>
-		<tr><td><%=seguro.getIdSeguro() %></td><td><%= seguro.getDescripcion()%></td><td><%= seguro.getTipoSeguro().getDescripcion() %></td><td><%= seguro.getCostoContratacion()%></td><td><%= seguro.getCostoAsegurado()%></td>  </tr>
+		<tr><td  style="text-align: center; "><%=seguro.getIdSeguro() %></td><td style="padding: 7px "><%= seguro.getDescripcion()%></td><td style="text-align: center; "><%= seguro.getTipoSeguro().getDescripcion() %></td><td style="text-align: center; "><%="$ " +  seguro.getCostoContratacion()%></td><td style="text-align: center; "><%="$ " +   seguro.getCostoAsegurado()%></td>  </tr>
 		<%} %>
 		</table>
 </form>

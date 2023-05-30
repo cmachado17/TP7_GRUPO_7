@@ -17,15 +17,16 @@
 	<br>
 	
 	<%
-	int filas= 0;
+	int filas= -1;
 	if(request.getAttribute("cantFilas")!=null){	
 		filas=Integer.parseInt(request.getAttribute("cantFilas").toString());
 	}
-%>
+	%>
 
- <%if(filas==1)
- 	{  %>
- 		<b> Se agregó exitosamente <b>
- <%	} %>
+	<%if(filas==1)
+		{  %>
+			<b> Se agregó exitosamente <b>
+	<%	} %>
+	
 </body>
 </html>

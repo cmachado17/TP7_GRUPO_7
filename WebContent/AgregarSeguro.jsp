@@ -23,6 +23,7 @@
 
 	
 		<% int proximo=0; 
+
 		
 		if(request.getAttribute("id") != null){
 		proximo = (int) request.getAttribute("id");
@@ -31,11 +32,11 @@
 	
 		<form action="servletSeguro" method="get">
 	
-		Id Seguro <b style="margin-left: 112px"> <%=proximo%>  </b> <br>	<br>
+		Id Seguro  <b style="margin-left: 124px"> <%=proximo%>  </b> <br>	<br>
 		
 		<%}//cierro el if %>	
 		
-		Descripcion	<input style="margin-left: 96px" type="text" name="txtDescripcion"> <br><br>	
+		Descripcion 	<input style="margin-left: 107px" type="text" name="txtDescripcion"> <br><br>	
 		
 		Tipo de seguro	
 		
@@ -47,7 +48,7 @@
 	}
 
 %>
-	<select  name="tipoSeguro" style="margin-left: 77px"> 
+	<select  name="tipoSeguro" style="margin-left: 89px; width:143px"> 
 	
 	<%  
 		if(listaTipoSeguros != null)
@@ -61,12 +62,21 @@
 		
 		
 		
-		Costo contratacion	<input style="margin-left: 53px" type="text" name="txtCostoContratacion"> <br><br>	
-		Costo máximo asegurado	<input style="margin-left: 10px" type="text" name="txtCostoMaximoAsegurado"> <br><br>
-	<input style="margin-left: 177px" type="submit" value="Aceptar" name="btnAceptar">
+		Costo contratacion $	<input style="margin-left: 53px" type="text" name="txtCostoContratacion" onkeypress="if ( isNaN( String.fromCharCode(event.keyCode) )) return false;"> <br><br>	
+		Costo máximo asegurado $	<input style="margin-left: 10px" type="text" name="txtCostoMaximoAsegurado" onkeypress="if ( isNaN( String.fromCharCode(event.keyCode) )) return false;"> <br><br>
+	<input style="margin-left: 190px" type="submit" value="Aceptar" name="btnAceptar">
 </form>
 
-
+	<%
+	int filas =-1;
+	if(request.getAttribute("cantFilas")!=null){		
+		filas=(int)request.getAttribute("cantFilas");
+	}
+	
+	if (filas==0){  %>
+			<br>
+			<b> Para agregar un registro todos los campos deben estar completados! <b>
+	<%	} %>
 
 </body>
 </html>
