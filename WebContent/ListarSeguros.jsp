@@ -17,6 +17,7 @@
 	<a href="servletSeguro?Param=2" style="margin-left: 5px">Listar seguros</a>
 </body>
 
+<form action="servletSeguro" method="get">
 <h1><b>"Tipos de seguros de la base de datos"<b></b></h1><br>
 Busqueda por tipo de seguros: <%
 
@@ -36,23 +37,23 @@ if(request.getAttribute("listaSeguros") != null){
 if(listaTipoSeguros != null)
 for(TipoSeguro tipo : listaTipoSeguros) { %>
 
-<option value="<%=tipo.getIdTipo()%>"><%=tipo.getDescripcion()%></option>
+<option value="<%=tipo.getIdTipo()%>"><%=tipo.getDescripcion()%> </option>
 
 
 
 <%} //cierro el for%>
 </select> 
-<input type="submit" name="txtFiltrar" value="Filtrar">
+<input type="submit" name="btnFiltrar" value="Filtrar">
 
 <br><br>			
 		
 		<table border="1">
-		<tr> 	<th>ID SEGURO</th>   <th>descripcion</th> <th>idTipo</th>   <th>costoContratacion</th> <th>costoAsegurado</th> </tr>
+		<tr> 	<th>ID seguro</th>   <th>Descripcion seguro</th> <th>Descripcion tipo seguro</th>   <th>Costo Contratacion</th> <th>Costo maximo asegurado</th> </tr>
 		<% if(listaSeguros != null)
 			for(Seguro seguro : listaSeguros){%>
-		<tr><td><%=seguro.getIdSeguro() %></td><td><%= seguro.getDescripcion()%></td><td><%= seguro.getTipoSeguro().getIdTipo() %></td><td><%= seguro.getCostoContratacion()%></td><td><%= seguro.getCostoAsegurado()%></td>  </tr>
+		<tr><td><%=seguro.getIdSeguro() %></td><td><%= seguro.getDescripcion()%></td><td><%= seguro.getTipoSeguro().getDescripcion() %></td><td><%= seguro.getCostoContratacion()%></td><td><%= seguro.getCostoAsegurado()%></td>  </tr>
 		<%} %>
 		</table>
-		
+</form>
 		
 </html>

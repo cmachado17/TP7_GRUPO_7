@@ -2,6 +2,8 @@ package servlet;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.stream.Collector;
+import java.util.stream.Collectors;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -86,6 +88,25 @@ public class servletSeguro extends HttpServlet {
 			request.setAttribute("cantFilas", filas);
 			RequestDispatcher rd=request.getRequestDispatcher("/Inicio.jsp");  
 	        rd.forward(request, response);  
+		}
+		
+		if(request.getParameter("btnFiltrar")!=null) {		
+			SeguroDao sdao = new SeguroDao();
+			ArrayList <Seguro> listaSeguros = sdao.obtenerSeguros();
+			int idTipoSeguro = Integer.parseInt(request.getParameter("tipoSeguro").toString());
+			listaSeguros = (ArrayList<Seguro>) listaSeguros
+					.stream()
+					.filter(x-> x.getTipoSeguro().getIdTipo() == idTipoSeguro)
+					.collect(Collectors.toList());
+			request.setAttribute("listaSeguros", listaSeguros);
+			
+			TipoSeguroDao tipoSeguroDaos = new TipoSeguroDao();
+			ArrayList <TipoSeguro> listaTs= tipoSeguroDaos.obtenerTiposSeguros();
+			request.setAttribute("listaTSS", listaTs);		
+			
+			RequestDispatcher rd= request.getRequestDispatcher("/ListarSeguros.jsp");
+			rd.forward(request, response);
+			
 		}
 		
 	}
