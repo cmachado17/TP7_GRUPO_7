@@ -1,6 +1,7 @@
 package servlet;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -11,6 +12,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import dominio.Seguro;
 import dominio.SeguroDao;
+import dominio.TipoSeguro;
+import dominio.TipoSeguroDao;
 
 
 @WebServlet("/servletSeguro")
@@ -28,9 +31,17 @@ public class servletSeguro extends HttpServlet {
 			
 			switch(request.getParameter("Param")) {
 			case "1":
+				
+				//le enviamos al jsp el id
 				SeguroDao seguroDao = new SeguroDao();
 				int proximo = seguroDao.obtenerProximoId();
 				request.setAttribute("id", proximo);
+				
+				TipoSeguroDao tipoSeguroDao = new TipoSeguroDao();
+				ArrayList <TipoSeguro> listaTipoSeguros = tipoSeguroDao.obtenerTiposSeguros();
+				//le enviamos al jsp la lista de los seguros de la bd
+				request.setAttribute("listaTS", listaTipoSeguros);
+				
 				dispatcher = "/AgregarSeguro.jsp";
 				
 				break;
