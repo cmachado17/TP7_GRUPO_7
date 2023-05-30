@@ -21,8 +21,12 @@
 Busqueda por tipo de seguros: <%
 
 ArrayList <TipoSeguro> listaTipoSeguros = null;
+ArrayList <Seguro> listaSeguros = null;
 if(request.getAttribute("listaTSS") != null){
 listaTipoSeguros = (ArrayList <TipoSeguro>) request.getAttribute("listaTSS");
+}
+if(request.getAttribute("listaSeguros") != null){
+	listaSeguros = (ArrayList <Seguro>) request.getAttribute("listaSeguros");
 }
 
 %>
@@ -44,8 +48,10 @@ for(TipoSeguro tipo : listaTipoSeguros) { %>
 		
 		<table border="1">
 		<tr> 	<th>ID SEGURO</th>   <th>descripcion</th> <th>idTipo</th>   <th>costoContratacion</th> <th>costoAsegurado</th> </tr>
-		<tr>     <td></td>                  <td></td>           <td></td>           <td></td>                        <td></td>  </tr>
-		
+		<% if(listaSeguros != null)
+			for(Seguro seguro : listaSeguros){%>
+		<tr><td><%=seguro.getIdSeguro() %></td><td><%= seguro.getDescripcion()%></td><td><%= seguro.getTipoSeguro().getIdTipo() %></td><td><%= seguro.getCostoContratacion()%></td><td><%= seguro.getCostoAsegurado()%></td>  </tr>
+		<%} %>
 		</table>
 		
 		

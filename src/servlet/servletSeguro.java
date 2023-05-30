@@ -48,8 +48,12 @@ public class servletSeguro extends HttpServlet {
 			case "2":
 			
 				TipoSeguroDao tipoSeguroDaos = new TipoSeguroDao();
-				ArrayList <TipoSeguro> lista= tipoSeguroDaos.obtenerTiposSeguros();
-				request.setAttribute("listaTSS", lista);
+				ArrayList <TipoSeguro> listaTs= tipoSeguroDaos.obtenerTiposSeguros();
+				request.setAttribute("listaTSS", listaTs);
+				
+				SeguroDao sdao = new SeguroDao();
+				ArrayList <Seguro> listaS= sdao.obtenerSeguros();
+				request.setAttribute("listaSeguros", listaS);
 				
 				RequestDispatcher rd= request.getRequestDispatcher("/ListarSeguros.jsp");
 				rd.forward(request, response);
@@ -68,9 +72,11 @@ public class servletSeguro extends HttpServlet {
 		
 		if(request.getParameter("btnAceptar")!=null) {
 	
+			TipoSeguroDao tsdao = new TipoSeguroDao();
+			
 			Seguro s = new Seguro();
 			s.setDescripcion(request.getParameter("txtDescripcion"));
-			s.setIdTipo(Integer.parseInt(request.getParameter("tipoSeguro").toString()));
+			s.setTipoSeguro(tsdao.obtenerTipoSeguro(request.getParameter("tipoSeguro").toString()));
 			s.setCostoContratacion(Float.parseFloat(request.getParameter("txtCostoContratacion").toString()));
 			s.setCostoAsegurado(Float.parseFloat(request.getParameter("txtCostoMaximoAsegurado").toString()));
 			

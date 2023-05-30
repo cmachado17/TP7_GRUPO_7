@@ -4,7 +4,7 @@ public class Seguro {
 	
 	private int idSeguro;
 	private String descripcion;
-	private int idTipo;
+	private TipoSeguro tipo;
 	private float costoContratacion;
 	private float costoAsegurado;
 	
@@ -17,20 +17,20 @@ public class Seguro {
 	public int getIdSeguro() {
 		return idSeguro;
 	}
-	//public void setIdSeguro(int idSeguro) {	NO HACE FALTA ESTE SETTER PORQUE EL ID SE GENERA AUTOMÁTICAMENTE EN LA BBDD
-	//	this.idSeguro = idSeguro;
-	//}
+	public void setIdSeguro(int idSeguro) {	
+		this.idSeguro = idSeguro;
+	}
 	public String getDescripcion() {
 		return descripcion;
 	}
 	public void setDescripcion(String descripcion) {
 		this.descripcion = descripcion;
 	}
-	public int getIdTipo() {
-		return idTipo;
+	public TipoSeguro getTipoSeguro() {
+		return this.tipo;
 	}
-	public void setIdTipo(int idTipo) {
-		this.idTipo = idTipo;
+	public void setTipoSeguro(TipoSeguro Tipo) {
+		this.tipo = Tipo;
 	}
 
 	public float getCostoContratacion() {
@@ -47,7 +47,7 @@ public class Seguro {
 	}
 	@Override
 	public String toString() {
-		return "Seguro [idSeguro=" + idSeguro + ", descripcion=" + descripcion + ", idTipo=" + idTipo
+		return "Seguro [idSeguro=" + idSeguro + ", descripcion=" + descripcion + ", idTipo=" + tipo
 				+ ", costoContratacion=" + costoContratacion + ", costoAsegurado=" + costoAsegurado + "]";
 	}
 }

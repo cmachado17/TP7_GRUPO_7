@@ -8,6 +8,11 @@ public class TipoSeguro {
 	public TipoSeguro() {
 		
 	}
+	
+	public TipoSeguro(int id, String descripcion) {
+		this.idTipo = id;
+		this.descripcion = descripcion;
+	}
 
 	public int getIdTipo() {
 		return idTipo;
